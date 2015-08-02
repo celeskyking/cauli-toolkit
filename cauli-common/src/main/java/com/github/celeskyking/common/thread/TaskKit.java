@@ -128,6 +128,12 @@ public class TaskKit<T> {
         }
     }
 
+    public boolean isTerminated(){
+        return this.executorService.isTerminated();
+    }
+
+
+
     /**该方法会阻塞所有的任务完成*/
     public void finish(){
         ListenableFuture<List<T>> listListenableFuture = Futures.allAsList(futures);
