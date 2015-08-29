@@ -13,7 +13,6 @@
         <module>cauli-selenium</module>
         <module>cauli-http</module>
         <module>cauli-junit</module>
-        <module>cauli-task</module>
     </modules>
 
     <dependencyManagement>

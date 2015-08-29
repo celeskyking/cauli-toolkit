@@ -80,16 +80,20 @@ public class Subscriber {
     }
 
     public boolean match(Object... objects){
-        if(objects.length!=0&&parameterTypes.length!=0){
-            if(objects.length==parameterTypes.length){
-                for(int i=0;i<objects.length;i++){
-                    if(!checkType(parameterTypes[i],objects[i].getClass())){
-                        return false;
+        if(objects!=null&&parameterTypes!=null){
+            if(objects.length!=0&&parameterTypes.length!=0){
+                if(objects.length==parameterTypes.length){
+                    for(int i=0;i<objects.length;i++){
+                        if(!checkType(parameterTypes[i],objects[i].getClass())){
+                            return false;
+                        }
                     }
+                    return true;
                 }
+            }else if(objects.length==0&&parameterTypes.length==0) {
                 return true;
             }
-        }else if(objects.length==0&&parameterTypes.length==0) {
+        }else if(objects==null&&parameterTypes==null){
             return true;
         }
         return false;
