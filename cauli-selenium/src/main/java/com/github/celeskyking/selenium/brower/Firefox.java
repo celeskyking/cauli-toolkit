@@ -1,4 +1,4 @@
-package com.qithub.celeskyking.selenium.brower;
+package com.github.celeskyking.selenium.brower;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -38,6 +38,10 @@ public class Firefox extends AbstractBrowser {
             firefoxDriver = new FirefoxDriver(profile);
         }
         return this;
+    }
+
+    public FirefoxDriver getWebDriver() {
+        return firefoxDriver;
     }
 
 }

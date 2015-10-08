@@ -1,4 +1,4 @@
-package com.qithub.celeskyking.selenium.element;
+package com.github.celeskyking.selenium.element;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
