@@ -39,7 +39,7 @@ public class Browser {
     }
 
     public WebDriver getWebDriver() {
-        return this.browser.getWebDriver();
+        return this.browser.driver();
     }
 
 
