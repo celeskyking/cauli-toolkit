@@ -3,7 +3,7 @@ package com.github.celeskyking.cauli.junit.testcase;
 /**
  * Created by tianqingwang on 15-10-12
  */
-public class TestCaseParamter {
+public class TestCaseParameter {
 
     private Class<?> type;
 

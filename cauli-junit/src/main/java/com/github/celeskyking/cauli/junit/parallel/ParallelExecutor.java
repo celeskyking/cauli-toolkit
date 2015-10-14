@@ -21,7 +21,6 @@ public class ParallelExecutor {
     }
 
 
-
     private static class ParallelThreadFactory implements ThreadFactory{
 
         private final AtomicInteger poolNumber = new AtomicInteger(1);
@@ -39,4 +38,11 @@ public class ParallelExecutor {
         }
     }
 
+    public int getThreads() {
+        return threads;
+    }
+
+    public void setThreads(int threads) {
+        this.threads = threads;
+    }
 }

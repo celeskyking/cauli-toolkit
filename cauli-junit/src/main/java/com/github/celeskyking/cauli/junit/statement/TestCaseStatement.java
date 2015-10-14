@@ -14,6 +14,7 @@ public class TestCaseStatement extends Statement{
     private TestConfig testConfig;
 
     private TestCaseStatement(TestConfig testConfig,TestCase testCase){
+        this.testConfig = testConfig;
         this.testCase = testCase;
     }
 
