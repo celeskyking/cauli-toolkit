@@ -34,7 +34,7 @@ public class ParallelExecutor {
 
         @Override
         public Thread newThread(Runnable r) {
-            return new Thread(threadGroup,r,threadGroup.getName()+"thread-"+threadNumber.getAndIncrement(),0);
+            return new Thread(threadGroup,r,threadGroup.getName()+"-thread-"+threadNumber.getAndIncrement(),0);
         }
     }
 
