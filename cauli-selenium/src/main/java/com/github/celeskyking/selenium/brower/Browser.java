@@ -12,7 +12,7 @@ import java.util.function.Consumer;
 public class Browser {
 
     private IBrowser browser;
-
+    
     private Browser(IBrowser browser){
         this.browser = browser;
     }

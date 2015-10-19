@@ -6,6 +6,7 @@ import com.github.celeskyking.selenium.URL;
 import com.github.celeskyking.selenium.brower.IBrowser;
 import com.github.celeskyking.selenium.description.FrameDescription;
 import com.github.celeskyking.selenium.element.IElement;
+import com.github.celeskyking.selenium.helper.BrowserHelper;
 import com.github.celeskyking.selenium.location.ElementLocation;
 import com.github.celeskyking.selenium.page.frame.Frame;
 import com.github.celeskyking.selenium.page.frame.FrameImpl;
@@ -17,17 +18,17 @@ import java.util.function.Consumer;
 /**
  * Created by sky on 15/9/29
  */
-public abstract class PageImpl<K> implements IPage,Location {
+public abstract class PageImpl implements IPage,Location {
 
     private IBrowser browser;
 
 
     public static IPage withTitle(IBrowser browser,String title){
-        return new TitlePage(browser,title);
+        return new PageWithTitle(browser,title);
     }
 
     public static IPage withURL(IBrowser browser,String url){
-        return new URLPage(browser,url);
+        return new PageWithUrl(browser,url);
     }
 
 
@@ -126,47 +127,35 @@ public abstract class PageImpl<K> implements IPage,Location {
         return null;
     }
 
-    public static class TitlePage extends PageImpl{
+    public static class PageWithTitle extends PageImpl{
 
 
         private String title;
 
-        private TitlePage(IBrowser browser,String title) {
+        private PageWithTitle(IBrowser browser,String title) {
             super(browser);
             this.title = title;
         }
 
         @Override
         public void locate() {
-            WebDriver driver = browser().driver();
-            for(String handle : driver.getWindowHandles()){
-                driver.switchTo().window(handle);
-                if(StringUtils.contains(driver.getTitle(),title)){
-                    break;
-                }
-            }
+            BrowserHelper.selectWindowWithTitle(browser(),title);
         }
     }
 
-    public static class URLPage extends PageImpl{
+    public static class PageWithUrl  extends PageImpl{
 
 
         private String url;
 
-        private URLPage(IBrowser browser,String url) {
+        private PageWithUrl(IBrowser browser,String url) {
             super(browser);
             this.url = url;
         }
 
         @Override
         public void locate() {
-            WebDriver driver = browser().driver();
-            for(String handle : driver.getWindowHandles()){
-                driver.switchTo().window(handle);
-                if(StringUtils.contains(driver.getCurrentUrl(),url)){
-                    break;
-                }
-            }
+            BrowserHelper.selectWindowWithCurrentUrl(browser(),this.url);
         }
 
     }
