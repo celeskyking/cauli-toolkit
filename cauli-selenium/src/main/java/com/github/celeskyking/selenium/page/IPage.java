@@ -16,8 +16,6 @@ import java.util.function.Consumer;
  */
 public interface IPage {
 
-
-
     IElement find(String location);
 
     IElement find(ElementLocation location);
@@ -35,11 +33,6 @@ public interface IPage {
     IPage to(URL url,Consumer<IPage> processor);
 
     <T extends IPage> T as(Class<T> pageClass);
-
-    /**
-     * 处理页面的逻辑
-     * */
-    IPage process(Consumer<IPage> processor);
 
     /**
      * 事物执行类,通过handler来封装要执行的页面操作,易于维护
@@ -63,5 +56,9 @@ public interface IPage {
     IPage parent();
 
     IPage screenShot();
+
+    String title();
+
+    String url();
 
 }
