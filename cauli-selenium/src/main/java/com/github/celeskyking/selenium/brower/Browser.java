@@ -1,6 +1,5 @@
 package com.github.celeskyking.selenium.brower;
 
-import com.github.celeskyking.selenium.Title;
 import com.github.celeskyking.selenium.page.IPage;
 import org.openqa.selenium.WebDriver;
 
@@ -44,11 +43,6 @@ public class Browser {
 
 
     public static void main(String[] args) {
-        Browser.firefox().open("http://www.baidu.com", page -> {
-            page.find("").click();
-            page.find("").click();
-        }).to(Title.of("百度一下,你就知道"), page -> {
 
-        });
     }
 }

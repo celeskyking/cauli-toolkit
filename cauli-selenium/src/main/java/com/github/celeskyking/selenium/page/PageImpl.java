@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 /**
  * Created by sky on 15/9/29
  */
-public abstract class PageImpl implements IPage,Location {
+public abstract class PageImpl<P> implements IPage,Location {
 
     private IBrowser browser;
 
@@ -82,8 +82,7 @@ public abstract class PageImpl implements IPage,Location {
         return null;
     }
 
-    @Override
-    public IPage process(Consumer<IPage> processor) {
+    public P process(Consumer<P> processor) {
         return null;
     }
 
@@ -125,6 +124,14 @@ public abstract class PageImpl implements IPage,Location {
     @Override
     public IPage screenShot() {
         return null;
+    }
+
+    public String title(){
+        return browser().driver().getTitle();
+    }
+
+    public String url(){
+        return browser().driver().getCurrentUrl();
     }
 
     public static class PageWithTitle extends PageImpl{
