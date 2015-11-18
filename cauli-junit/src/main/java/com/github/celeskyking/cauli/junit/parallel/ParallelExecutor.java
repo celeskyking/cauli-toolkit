@@ -1,12 +1,14 @@
 package com.github.celeskyking.cauli.junit.parallel;
 
+import org.junit.runners.model.RunnerScheduler;
+
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by sky on 15/9/20
  */
-public class ParallelExecutor {
+public class ParallelExecutor implements RunnerScheduler{
 
     private int threads;
 
@@ -18,6 +20,16 @@ public class ParallelExecutor {
         this.threads = threads;
         this.executorService = Executors.newFixedThreadPool(threads,new ParallelThreadFactory("testcase-pool"));
         this.completionService = new ExecutorCompletionService<>(executorService);
+    }
+
+    @Override
+    public void schedule(Runnable runnable) {
+        
+    }
+
+    @Override
+    public void finished() {
+
     }
 
 

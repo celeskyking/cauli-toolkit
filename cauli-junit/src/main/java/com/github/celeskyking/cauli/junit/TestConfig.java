@@ -1,7 +1,6 @@
 package com.github.celeskyking.cauli.junit;
 
 import com.github.celeskyking.cauli.junit.builder.TestCaseBuilder;
-import com.github.celeskyking.cauli.junit.builder.TestSuiteBuilder;
 import com.github.celeskyking.cauli.junit.filter.TestFilter;
 import com.github.celeskyking.cauli.junit.reporter.Reporter;
 

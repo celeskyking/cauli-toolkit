@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * Created by tianqingwang on 15-10-14
  */
-public class CauliUnit extends ParentRunner<TestCase> {
+public class CoreRunner extends ParentRunner<TestCase> {
 
     private TestConfig testConfig;
 
-    protected CauliUnit(Class<?> testClass) throws InitializationError {
+    protected CoreRunner(Class<?> testClass) throws InitializationError {
         super(testClass);
         if(TestPlan.class.isAssignableFrom(testClass)&&testClass.getDeclaredConstructors().length==1
                 &&testClass.getDeclaredConstructors()[0].getParameterCount()==0){

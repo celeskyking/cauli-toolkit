@@ -35,7 +35,7 @@ public class TestCase extends FrameworkMethod {
     /**
      * case的参数列表
      * */
-    private List<TestCaseParamter> paramters = Lists.newArrayList();
+    private List<TestCaseParameter> parameters = Lists.newArrayList();
 
 
     public String getTag() {
@@ -86,12 +86,12 @@ public class TestCase extends FrameworkMethod {
         this.dependencies = dependencies;
     }
 
-    public List<TestCaseParamter> getParamters() {
-        return paramters;
+    public List<TestCaseParameter> getParamters() {
+        return parameters;
     }
 
-    public void setParamters(List<TestCaseParamter> paramters) {
-        this.paramters = paramters;
+    public void setParamters(List<TestCaseParameter> paramters) {
+        this.parameters = paramters;
     }
 
     public TestCase(Method method) {

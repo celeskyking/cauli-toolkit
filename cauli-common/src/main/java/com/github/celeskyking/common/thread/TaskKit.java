@@ -20,10 +20,8 @@ public class TaskKit<T> {
 
     public TaskKit(ExecutorService executor){
         this.executorService = MoreExecutors.listeningDecorator(executor);
-        this.fallBack = new FallBack<T>() {
-            public T fallback(Throwable throwable) throws Throwable {
-                throw throwable;
-            }
+        this.fallBack = throwable -> {
+            throw throwable;
         };
     }
 
@@ -32,17 +30,15 @@ public class TaskKit<T> {
 
     public void submit(Callable<T> callback,final TaskListener<T>... listeners){
         final ListenableFuture<T> listenableFuture = this.executorService.submit(callback);
-        FutureFallback<T> futureFallback = new FutureFallback<T>() {
-            public ListenableFuture<T> create(Throwable throwable) throws Exception {
-                SettableFuture<T> settableFuture = SettableFuture.create();
-                try{
-                    T t = fallBack.fallback(throwable);
-                    settableFuture.set(t);
-                } catch (Throwable throwable1) {
-                    settableFuture.setException(throwable1);
-                }
-                return settableFuture;
+        FutureFallback<T> futureFallback = throwable -> {
+            SettableFuture<T> settableFuture = SettableFuture.create();
+            try{
+                T t = fallBack.fallback(throwable);
+                settableFuture.set(t);
+            } catch (Throwable throwable1) {
+                settableFuture.setException(throwable1);
             }
+            return settableFuture;
         };
         ListenableFuture<T> future = Futures.withFallback(listenableFuture, futureFallback);
         Futures.addCallback(future, new FutureCallback<T>() {
@@ -71,7 +67,7 @@ public class TaskKit<T> {
     private FallBack<T> fallBack;
 
     /***如果出现了异常,可以进行异常恢复操作,阻止异常抛出,或者特定异常返回指定结果*/
-    public void withFallback(FallBack<T> fallback){
+    public void setFallback(FallBack<T> fallback){
         this.fallBack=fallback;
     }
 
@@ -79,22 +75,16 @@ public class TaskKit<T> {
      * 提交异步执行的方法
      * */
     public void submit(final Task<T> task){
-        ListenableFuture<T> listenableFuture=this.executorService.submit(new Callable<T>() {
-            public T call() throws Exception {
-                return task.handle();
+        ListenableFuture<T> listenableFuture=this.executorService.submit(task::handle);
+        FutureFallback<T> futureFallback = throwable -> {
+            SettableFuture<T> settableFuture = SettableFuture.create();
+            try{
+                T t = fallBack.fallback(throwable);
+                settableFuture.set(t);
+            } catch (Throwable throwable1) {
+                settableFuture.setException(throwable1);
             }
-        });
-        FutureFallback<T> futureFallback = new FutureFallback<T>() {
-            public ListenableFuture<T> create(Throwable throwable) throws Exception {
-                SettableFuture<T> settableFuture = SettableFuture.create();
-                try{
-                    T t = fallBack.fallback(throwable);
-                    settableFuture.set(t);
-                } catch (Throwable throwable1) {
-                    settableFuture.setException(throwable1);
-                }
-                return settableFuture;
-            }
+            return settableFuture;
         };
         ListenableFuture<T> future = Futures.withFallback(listenableFuture, futureFallback);
         Futures.addCallback(future, new FutureCallback<T>() {
